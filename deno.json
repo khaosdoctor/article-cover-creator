@@ -1,0 +1,21 @@
+{
+  "importMap": "./import_map.json",
+  "fmt": {
+    "options": {
+      "indentWidth": 2,
+      "useTabs": true,
+      "singleQuote": true,
+      "lineWidth": 100
+    }
+  },
+  "lock": true,
+  "tasks": {
+    "start": "deno run --allow-read --allow-net --allow-env src/mod.ts",
+    "dev": "DENO_ENV=local denon run -A src/mod.ts"
+  },
+  "lint": {
+    "rules": {
+      "exclude": ["no-explicit-any"]
+    }
+  }
+}
