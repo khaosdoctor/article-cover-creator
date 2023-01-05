@@ -1,4 +1,5 @@
 {
   "deno.enable": true,
-  "deno.unstable": false
+  "deno.unstable": false,
+  "[typescript]": { "editor.defaultFormatter": "denoland.vscode-deno" }
 }
