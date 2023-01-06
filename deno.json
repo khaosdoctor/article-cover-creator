@@ -10,9 +10,8 @@
   },
   "lock": true,
   "tasks": {
-    "start": "deno run --allow-read --allow-net --allow-write --allow-run --unstable --allow-env src/mod.ts",
-    "dev": "DENO_ENV=local denon run -A src/mod.ts",
-    "install:puppeteer": "PUPPETEER_PRODUCT=chrome deno run -A --unstable https://deno.land/x/puppeteer@16.2.0/install.ts"
+    "api": "deno run --allow-read --allow-net --allow-write --allow-run --unstable --allow-env src/presentation/api/api.ts",
+    "dev:api": "DENO_ENV=local denon run -A src/presentation/api/api.ts"
   },
   "lint": {
     "rules": {
