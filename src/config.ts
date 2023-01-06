@@ -11,9 +11,7 @@ type rawEnv = {
 };
 
 export const loadConfig = async (): Promise<AppConfig> => {
-	Deno.stdout.write(new TextEncoder().encode('Loading config...\n'));
 	const loadedEnvs = await load({ export: true }) as unknown as rawEnv;
-	Deno.stdout.write(new TextEncoder().encode('Config Loaded...\n'));
 
 	return {
 		port: Number(loadedEnvs.PORT),
