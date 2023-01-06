@@ -1,13 +1,13 @@
-import { parse } from 'std/flags/mod.ts'
-import { cliFlagsSchema } from './validation.ts'
-import chalk from "npm:chalk"
-import { ZodError } from 'x/zod@v3.20.2/mod.ts'
-import { importTemplate } from '../../actions/importTemplate.ts'
 import { render } from 'https://esm.sh/ejs@3.1.8'
-import { initializeBrowser } from "../../actions/initBrowser.ts"
-import { createImageFromHTML } from '../../actions/createImageFromHtml.ts'
-import { loadConfig } from "../../config.ts"
 import { crypto, toHashString } from 'std/crypto/mod.ts'
+import { parse } from 'std/flags/mod.ts'
+import { fg } from 'x/colorify@1.0.5/mod.ts'
+import { ZodError } from 'x/zod@v3.20.2/mod.ts'
+import { createImageFromHTML } from '../../actions/createImageFromHtml.ts'
+import { importTemplate } from '../../actions/importTemplate.ts'
+import { initializeBrowser } from "../../actions/initBrowser.ts"
+import { loadConfig } from "../../config.ts"
+import { cliFlagsSchema } from './validation.ts'
 
 const config = await loadConfig()
 
@@ -31,7 +31,7 @@ function printHelp () {
 function returnImage (image: Uint8Array, flags: cliFlagsSchema) {
   if (flags.output || flags.o) {
     const path = flags.output || flags.o as string
-    console.log(chalk.green(`📷 Saving image to ${path}...`))
+    fg.green(`📷 Saving image to ${path}...`)
     Deno.writeFile(path, image, { create: true })
   }
 
@@ -48,51 +48,51 @@ async function main (args: string[]) {
     const parsedFlags: cliFlagsSchema = await cliFlagsSchema.parseAsync(flags)
 
     if (!flags.output && !flags.o) {
-      console.log(chalk.yellow('🤔 No output flag specified. Please specify --output or -o.'))
+      fg.yellow('🤔 No output flag specified. Please specify --output or -o.')
       Deno.exit(1)
     }
 
     const uniqueHash = toHashString(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(parsedFlags))), 'hex')
 
     if (!parsedFlags.force && !parsedFlags.f) {
-      console.log(chalk.blue('🔍 Looking for cached image...'))
+      fg.blue('🔍 Looking for cached image...')
       await Deno.mkdir(config.cacheDir, { recursive: true })
 
       try {
         const cachedImage = await Deno.readFile(`${config.cacheDir}/${uniqueHash}`)
-        console.log(chalk.green('📸 Found cached image.'))
+        fg.green('📸 Found cached image.')
         return returnImage(cachedImage, parsedFlags)
       } catch (err) {
         if (err instanceof Deno.errors.NotFound) {
-          console.log(chalk.yellow('🔍 No cached image found.'))
+          fg.yellow('🔍 No cached image found.')
         } else {
           throw err
         }
       }
     }
 
-    console.log(chalk.yellow('🎨 Importing template...'))
+    fg.yellow('🎨 Importing template...')
     const template = await importTemplate()
 
-    console.log(chalk.yellow('Generating image...'))
+    fg.yellow('Generating image...')
     const parsedTemplate = render(template, parsedFlags)
 
-    console.log(chalk.blue('🌎 Initializing browser...'))
+    fg.blue('🌎 Initializing browser...')
     const browser = await initializeBrowser()
 
-    console.log(chalk.yellow('📺 Rendering...'))
+    fg.yellow('📺 Rendering...')
     const image = new Uint8Array(await createImageFromHTML(browser, parsedTemplate))
 
-    console.log(chalk.blue('📸 Caching image...'))
+    fg.blue('📸 Caching image...')
     Deno.writeFile(`${config.cacheDir}/${uniqueHash}`, image, { create: true })
 
     return returnImage(image, parsedFlags)
   } catch (err) {
     if (err instanceof ZodError) {
-      console.error(chalk.red('Error parsing flags:'), (err as ZodError).issues[0].message)
-      console.error(chalk.yellow('Flags:'), (err as ZodError).issues[0].path)
+      console.error(fg.red('Error parsing flags:'), (err as ZodError).issues[0].message)
+      console.error(fg.yellow('Flags:'), (err as ZodError).issues[0].path)
     } else {
-      console.error(chalk.red('Error:'), err)
+      console.error(fg.red('Error:'), err)
     }
     Deno.exit(1)
   }
