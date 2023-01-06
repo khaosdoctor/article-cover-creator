@@ -3,6 +3,7 @@ import { render } from 'https://esm.sh/ejs@3.1.8';
 import { fromFileUrl, resolve } from 'std/path/mod.ts'
 import { Application, Router } from 'x/oak@v11.1.0/mod.ts';
 import puppeeteer, { Browser } from 'x/puppeteer@16.2.0/mod.ts';
+import 'x/puppeteer@16.2.0/install.ts'
 import { loadConfig } from './config.ts';
 import { cacheFactory } from "./controllers/cacheFactory.ts"
 import { createImageFromHTML } from './controllers/createImageFromHtml.ts';
@@ -26,7 +27,6 @@ Deno.addSignalListener('SIGTERM', gracefulShutdown);
 
 try {
 	log(`Downloading and launching browser...`)
-	await import('x/puppeteer@16.2.0/install.ts')
 	browser = await puppeeteer.launch({ headless: true });
 } catch (error) {
 	console.error(`Error launching browser: ${error}`);
