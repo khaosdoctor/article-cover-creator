@@ -11,7 +11,13 @@
   "lock": true,
   "tasks": {
     "api": "deno run --allow-read --allow-net --allow-write --allow-run --unstable --allow-env src/presentation/api/api.ts",
-    "dev:api": "DENO_ENV=local denon run -A src/presentation/api/api.ts"
+    "dev:api": "DENO_ENV=local denon run -A src/presentation/api/api.ts",
+    "cli": "deno run --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
+    "compile:cli:arm": "deno compile --target aarch64-apple-darwin -o ./bin/cover-gen-mac-arm --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
+    "compile:cli:darwin": "deno compile --target x86_64-apple-darwin -o ./bin/cover-gen-mac-intel --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
+    "compile:cli:linux": "deno compile --target x86_64-unknown-linux-gnu -o ./bin/cover-gen-linux --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
+    "compile:cli:win": "deno compile --target x86_64-pc-windows-msvc -o ./bin/cover-gen.exe --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
+    "compile:cli": "deno task compile:cli:arm && deno task compile:cli:darwin && deno task compile:cli:linux && deno task compile:cli:win"
   },
   "lint": {
     "rules": {
