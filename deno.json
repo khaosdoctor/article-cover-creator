@@ -10,7 +10,7 @@
   },
   "lock": true,
   "tasks": {
-    "start": "deno task install:puppeteer && deno run --allow-read --allow-net --allow-write --allow-run --allow-env src/mod.ts",
+    "start": "deno run --allow-read --allow-net --allow-write --allow-run --unstable --allow-env src/mod.ts",
     "dev": "DENO_ENV=local denon run -A src/mod.ts",
     "install:puppeteer": "PUPPETEER_PRODUCT=chrome deno run -A --unstable https://deno.land/x/puppeteer@16.2.0/install.ts"
   },
