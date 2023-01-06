@@ -1,18 +1,20 @@
+#!/usr/bin/env DENO_DIR=/tmp deno run --allow-net --allow-read --allow-write --allow-env --unstable
 import { render } from 'https://esm.sh/ejs@3.1.8';
 import { fromFileUrl, resolve } from 'std/path/mod.ts'
 import { Application, Router } from 'x/oak@v11.1.0/mod.ts';
 import puppeeteer, { Browser } from 'x/puppeteer@16.2.0/mod.ts';
 import { loadConfig } from './config.ts';
+import { cacheFactory } from "./controllers/cacheFactory.ts"
 import { createImageFromHTML } from './controllers/createImageFromHtml.ts';
 import { sendImageResponse } from './routes/blog/articles/respondWithImage.ts';
 import { getBlogArticleQueryStringSchema } from './routes/blog/articles/validation.ts';
 import { errorMapper } from './utils/errorMapper.ts';
-const log = (message: string) => Deno.stdout.write(new TextEncoder().encode(`${message}\n`));
+const log = (message: string) => console.log(message)
 const config = await loadConfig();
 
 let ejsTemplate: string;
 let browser: Browser;
-const articleCache = await caches.open('blog-articles');
+const articleCache = await cacheFactory('article-cache');
 
 const gracefulShutdown = async () => {
 	console.log(`Shutting down...`);
@@ -83,5 +85,5 @@ app.use(async (ctx, next) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-log(`Server running on port ${config.port}`);
-await app.listen({ port: config.port });
+log(`Server listening on port ${config.port}`)
+app.listen({ port: config.port })
