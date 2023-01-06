@@ -2,6 +2,25 @@
 
 > Simple utility for generating cover images for my [blog posts](https://blog.lsantos.dev)
 
+# Summary
+
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [Cover generator](#cover-generator)
+- [Summary](#summary)
+- [As web API](#as-web-api)
+  - [Usage](#usage)
+  - [How it works](#how-it-works)
+  - [Customizing](#customizing)
+- [As CLI](#as-cli)
+  - [Usage](#usage-1)
+
+<!-- /code_chunk_output -->
+
+
 # As web API
 
 ## Usage
