@@ -6,5 +6,5 @@ export const createImageFromHTML = async (browserInstance: Browser, html: string
 	await page.setContent(html);
 	const image = await page.screenshot({ encoding: 'binary' });
 	page.close();
-	return image;
+	return image as Buffer
 };

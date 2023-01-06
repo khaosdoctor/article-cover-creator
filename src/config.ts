@@ -3,6 +3,7 @@ import { load } from 'std/dotenv/mod.ts';
 export interface AppConfig {
 	port: number;
 	isLocal: boolean;
+	cacheDir: string
 }
 
 type rawEnv = {
@@ -16,5 +17,6 @@ export const loadConfig = async (): Promise<AppConfig> => {
 	return {
 		port: Number(loadedEnvs.PORT),
 		isLocal: Deno.env.get('DENO_ENV') as string === 'local',
+		cacheDir: loadedEnvs.CACHEDIR || `${Deno.env.get('HOME')}/.cache/cover-gen`,
 	};
 };
