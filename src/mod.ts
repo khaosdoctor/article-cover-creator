@@ -1,6 +1,5 @@
 import { render } from 'https://esm.sh/ejs@3.1.8';
-import { fromFileUrl, resolve } from 'std/path/mod.ts';
-import { oakCors } from 'x/cors@v1.2.2/mod.ts';
+import { fromFileUrl, resolve } from 'std/path/mod.ts'
 import { Application, Router } from 'x/oak@v11.1.0/mod.ts';
 import puppeeteer, { Browser } from 'x/puppeteer@16.2.0/mod.ts';
 import { loadConfig } from './config.ts';
@@ -43,9 +42,6 @@ try {
 }
 
 const router = new Router();
-const cors = oakCors({
-	origin: config.isLocal ? true : /^.+lsantos.dev$/,
-});
 
 router.get('/blog/articles', async (ctx) => {
 	const cachedImage = await articleCache.match(ctx.request.url);
@@ -61,7 +57,7 @@ router.get('/blog/articles', async (ctx) => {
 	const templateParams = { ...parsedQueryString, autoFit: !!parsedQueryString.noFit ?? true };
 	const parsedTemplateString = render(ejsTemplate, templateParams);
 	const image = await createImageFromHTML(browser, parsedTemplateString) as Buffer;
-	await articleCache.put(
+	articleCache.put(
 		ctx.request.url,
 		new Response(image, { headers: { 'Content-Type': 'image/png' } }),
 	);
@@ -70,7 +66,6 @@ router.get('/blog/articles', async (ctx) => {
 });
 
 const app = new Application();
-app.use(cors);
 
 // Error Handler
 app.use(async (ctx, next) => {
