@@ -1,5 +1,5 @@
 .env
-
+bin/
 ### Node
 # Logs
 logs
