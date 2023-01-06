@@ -10,7 +10,7 @@ Clone the repository and run the following command:
 $ deno cache --lock=deno.lock ./src/**/*.ts
 ```
 
-Then, you can run `deno task start` to start the server.
+Then, you can run `deno task start` to start the server. By default it runs on port 3000, but you can set the `PORT` variable to change that.
 
 ## How it works
 
