@@ -19,5 +19,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "cover-gen"
-          entrypoint: "mod.ts"
-          root: src
+          entrypoint: "src/mod.ts"
