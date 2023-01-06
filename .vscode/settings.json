@@ -1,5 +1,10 @@
 {
   "deno.enable": true,
   "deno.unstable": false,
-  "[typescript]": { "editor.defaultFormatter": "denoland.vscode-deno" }
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "prettier.enable": false,
+  "eslint.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
 }
