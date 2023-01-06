@@ -13,8 +13,8 @@ class Cache {
 }
 
 export const cacheFactory = (cacheName: string) => {
-  if (caches) {
-    return caches.open(cacheName)
+  if (globalThis.caches !== undefined) {
+    return globalThis.caches.open(cacheName)
   }
 
   return Promise.resolve(new Cache(cacheName))
