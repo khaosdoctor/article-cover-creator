@@ -14,7 +14,7 @@ Then, you can run `deno task start` to start the server.
 
 ## How it works
 
-The inner workings of the project are pretty simple. In general, this app is just a web server with a single URL that receives search parameters that follow the format described in [this file](./src/routes/blog/articles/validation.ts); this route responds with a png image. You can use the cover URLs as direct sources to `<img`>` tags, which I wanted to do in the first place.
+The inner workings of the project are pretty simple. In general, this app is just a web server with a single URL that receives search parameters that follow the format described in [this file](./src/routes/blog/articles/validation.ts); this route responds with a png image. You can use the cover URLs as direct sources to `<img>` tags, which I wanted to do in the first place.
 
 Internally, when a request is made to the server, it validates the parameters sent and spins up a puppeteer page, which is used to render the image. Then a screenshot of that page is taken and returned as a response. There's also a caching mechanism to avoid rendering the same image twice.
 
