@@ -23,7 +23,8 @@ Deno.addSignalListener('SIGINT', gracefulShutdown);
 Deno.addSignalListener('SIGTERM', gracefulShutdown);
 
 try {
-	log(`Launching browser...`);
+	log(`Downloading and launching browser...`)
+	await import('x/puppeteer@16.2.0/install.ts')
 	browser = await puppeeteer.launch({ headless: true });
 } catch (error) {
 	console.error(`Error launching browser: ${error}`);
