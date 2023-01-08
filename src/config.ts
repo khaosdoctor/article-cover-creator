@@ -3,7 +3,7 @@ import { load } from 'std/dotenv/mod.ts';
 export interface AppConfig {
 	port: number;
 	isLocal: boolean;
-	cacheDir: string
+	cacheDir: string;
 }
 
 type rawEnv = {

@@ -1,4 +1,4 @@
-import { Browser } from "x/puppeteer@16.2.0/mod.ts";
+import { Browser } from 'x/puppeteer@16.2.0/mod.ts';
 
 export const createImageFromHTML = async (browserInstance: Browser, html: string) => {
 	const page = await browserInstance.newPage();
@@ -6,5 +6,5 @@ export const createImageFromHTML = async (browserInstance: Browser, html: string
 	await page.setContent(html);
 	const image = await page.screenshot({ encoding: 'binary' });
 	page.close();
-	return image as Buffer
+	return image as Buffer;
 };
