@@ -20,10 +20,11 @@
 
 <!-- /code_chunk_output -->
 
+# Usage
 
-# As web API
+In any of the cases, first run the command `PUPPETEER_PRODUCT=chrome deno run -A 'https://deno.land/x/puppeteer@16.2.0/install.ts'` to install puppeteer. This is needed because the project uses puppeteer to render the images. You can see more about it [here](https://deno.land/x/puppeteer@16.2.0#getting-started).
 
-## Usage
+## As web API
 
 Clone the repository and run the following command:
 
@@ -40,11 +41,9 @@ The inner workings of the project are pretty simple. In general, this app is jus
 
 Internally, when a request is made to the server, it validates the parameters sent and spins up a puppeteer page, which is used to render the image. Then a screenshot of that page is taken and returned as a response. There's also a caching mechanism to avoid rendering the same image twice.
 
-# As CLI
+## As CLI
 
 There's also the possibility to use this project as a CLI tool. This is useful if you want to generate the images locally, for example, to use in your blog posts.
-
-## Usage
 
 Clone the repository and run the following command:
 
@@ -52,7 +51,9 @@ Clone the repository and run the following command:
 $ deno task compile:cli
 ```
 
-Then, you can run the CLI directly from the `bin` folder. It takes the same parameters as the web API, but you need to pass them as flags. For example:
+> You can also check `deno.json` for a task that compiles the CLI only for your current platform.
+
+Then, you can run the CLI directly from the `bin` folder (or you can move/symlink it to your PATH). It takes the same parameters as the web API, but you need to pass them as flags. For example:
 
 ```bash
 ./bin/cover-gen-arm --title="Your title" --image="http://imageurl.com" -o cover.png
