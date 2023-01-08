@@ -1,4 +1,5 @@
 import { RouterContext } from 'x/oak@v11.1.0/mod.ts';
+import { Buffer } from 'std/io/buffer.ts';
 
 export const sendImageResponse = (
 	ctx: RouterContext<
