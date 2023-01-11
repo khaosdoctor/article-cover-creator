@@ -3,8 +3,6 @@ import { dirname, fromFileUrl, resolve } from 'std/path/mod.ts';
 import * as React from 'react';
 
 export interface TemplateParams {
-	autoFit: boolean;
-	noFit?: string | undefined;
 	title: string;
 	image: string;
 	fontSize: string;

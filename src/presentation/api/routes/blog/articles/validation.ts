@@ -7,7 +7,6 @@ export const getBlogArticleQueryStringSchema = z.object({
 	marginLeft: z.string().default('75px'),
 	marginTop: z.string().default('85px'),
 	widthLimit: z.string().default('65%'),
-	noFit: z.string().optional(),
 	debug: z.string().optional(),
 });
 
