@@ -1,46 +1,45 @@
-#!/usr/bin/env DENO_DIR=/tmp deno run --allow-net --allow-read --allow-write --allow-env --unstable
-import { render } from 'https://esm.sh/ejs@3.1.8';
+import { fromFileUrl, resolve } from 'std/path/mod.ts';
 import { Application, Router } from 'x/oak@v11.1.0/mod.ts';
+import { createImageFromHTML } from '../../actions/createImageFromHtml.tsx';
 import { loadConfig } from '../../config.ts';
-import { cacheFactory } from '../../actions/cacheFactory.ts';
-import { createImageFromHTML } from '../../actions/createImageFromHtml.ts';
-import { sendImageResponse } from './utils/respondWithImage.ts';
-import { getBlogArticleQueryStringSchema } from './routes/blog/articles/validation.ts';
+import { withDebug } from './utils/runWithDebug.ts';
 import { errorMapper } from './utils/errorMapper.ts';
-import { importTemplate } from '../../actions/importTemplate.ts';
-import { addSignalListeners } from '../../utils/addSignalListeners.ts';
-import { initializeBrowser } from '../../actions/initBrowser.ts';
+import { sendImageResponse } from './utils/respondWithImage.ts';
+import { articleTemplate, TemplateParams } from '../../templates/article.tsx';
+import { getBlogArticleQueryStringSchema } from './routes/blog/articles/validation.ts';
 
-const browser = await initializeBrowser();
 const config = await loadConfig();
-const ejsTemplate = await importTemplate();
-const articleCache = await cacheFactory('article-cache');
-
-addSignalListeners(browser);
-
 const router = new Router();
 router.get('/blog/articles', async (ctx) => {
-	const cachedImage = await articleCache.match(ctx.request.url);
-	if (cachedImage) {
-		console.log(`Cache hit for ${ctx.request.url}`);
-		const image = await cachedImage.arrayBuffer();
-		return sendImageResponse(ctx, new Uint8Array(image) as Buffer);
-	}
-
-	console.log(`Cache miss for ${ctx.request.url}, saving...`);
+	const canvasSize = [1440, 732];
 	const queryString = Object.fromEntries(ctx.request.url.searchParams.entries());
-	const parsedQueryString = await getBlogArticleQueryStringSchema.parseAsync(queryString);
-	const templateParams = { ...parsedQueryString, autoFit: !!parsedQueryString.noFit ?? true };
-
-	const parsedTemplateString = render(ejsTemplate, templateParams);
-	const image = await createImageFromHTML(browser, parsedTemplateString) as Buffer;
-
-	articleCache.put(
-		ctx.request.url,
-		new Response(image, { headers: { 'Content-Type': 'image/png' } }),
+	const { debug, ...parsedQueryString } = await getBlogArticleQueryStringSchema.parseAsync(
+		queryString,
 	);
 
-	sendImageResponse(ctx, image);
+	const parsedImageURL = new URL(parsedQueryString.image);
+	const templateParams: TemplateParams = {
+		...parsedQueryString,
+		image: `${parsedImageURL.origin}${parsedImageURL.pathname}?fit=crop&auto=format&q=60&w=${
+			canvasSize[0]
+		}&h=${canvasSize[1]}&fm=jpg`,
+		autoFit: !!parsedQueryString.noFit ?? true,
+	};
+
+	const [fontData, fontElapsed] = await withDebug(async () =>
+		await Deno.readFile(
+			resolve(fromFileUrl(import.meta.url), '../../../templates/fonts/AllerDisplay.ttf'),
+		), !!debug);
+	const [template, templateElapsed] = await withDebug(
+		async () => await articleTemplate(templateParams),
+		!!debug,
+	);
+	const [image, imageElapsed] = await withDebug(
+		async () => await createImageFromHTML(template, fontData, canvasSize[0], canvasSize[1]),
+		!!debug,
+	);
+
+	sendImageResponse(ctx, image, debug ? { fontElapsed, templateElapsed, imageElapsed } : undefined);
 });
 
 const app = new Application();

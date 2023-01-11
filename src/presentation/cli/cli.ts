@@ -5,7 +5,6 @@ import { fg } from 'x/colorify@1.0.5/mod.ts';
 import { ZodError } from 'x/zod@v3.20.2/mod.ts';
 import { createImageFromHTML } from '../../actions/createImageFromHtml.ts';
 import { importTemplate } from '../../actions/importTemplate.ts';
-import { initializeBrowser } from '../../actions/initBrowser.ts';
 import { loadConfig } from '../../config.ts';
 import { cliFlagsSchema } from './validation.ts';
 
