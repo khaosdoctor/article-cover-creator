@@ -11,18 +11,14 @@
 
 - [Cover generator](#cover-generator)
 - [Summary](#summary)
-- [As web API](#as-web-api)
-  - [Usage](#usage)
+- [Usage](#usage)
+  - [As web API](#as-web-api)
   - [How it works](#how-it-works)
-- [As CLI](#as-cli)
-  - [Usage](#usage-1)
 - [Customizing](#customizing)
 
 <!-- /code_chunk_output -->
 
 # Usage
-
-In any of the cases, first run the command `PUPPETEER_PRODUCT=chrome deno run -A 'https://deno.land/x/puppeteer@16.2.0/install.ts'` to install puppeteer. This is needed because the project uses puppeteer to render the images. You can see more about it [here](https://deno.land/x/puppeteer@16.2.0#getting-started).
 
 ## As web API
 
@@ -40,28 +36,6 @@ Then, you can run `deno task start` to start the server. By default it runs on p
 The inner workings of the project are pretty simple. In general, this app is just a web server with a single URL that receives search parameters that follow the format described in [this file](./src/presentation/api/routes/blog/articles/validation.ts); this route responds with a png image. You can use the cover URLs as direct sources to `<img>` tags, which I wanted to do in the first place.
 
 Internally, when a request is made to the server, in this version, I was able to remove the browser completely and just use [this nice little lib](https://github.com/vercel/satori#documentation) to generate the images, it's 95% faster and runs on any serverless provider. All the parameters are kept the same.
-
-## As CLI
-
-There's also the possibility to use this project as a CLI tool. This is useful if you want to generate the images locally, for example, to use in your blog posts.
-
-Clone the repository and run the following command:
-
-```bash
-$ deno task compile:cli
-```
-
-> You can also check `deno.json` for a task that compiles the CLI only for your current platform.
-
-Then, you can run the CLI directly from the `bin` folder (or you can move/symlink it to your PATH). It takes the same parameters as the web API, but you need to pass them as flags. For example:
-
-```bash
-./bin/cover-gen-arm --title="Your title" --image="http://imageurl.com" -o cover.png
-```
-
-If you run it without any parameters, it will show the help message.
-
-The CLI also has a cache that it's stored, by default in `$HOME/.cache/cover-gen` however, you can change this by setting the `CACHEDIR` environment variable.
 
 # Customizing
 
