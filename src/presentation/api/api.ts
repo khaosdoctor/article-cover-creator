@@ -13,17 +13,12 @@ const router = new Router();
 router.get('/blog/articles', async (ctx) => {
 	const canvasSize = [1440, 732];
 	const queryString = Object.fromEntries(ctx.request.url.searchParams.entries());
-	const { debug, ...parsedQueryString } = await getBlogArticleQueryStringSchema.parseAsync(
+	const { debug, ...parsedQueryString } = await getBlogArticleQueryStringSchema(canvasSize).parseAsync(
 		queryString,
 	);
 
-	const parsedImageURL = new URL(parsedQueryString.image);
 	const templateParams: TemplateParams = {
 		...parsedQueryString,
-		image: `${parsedImageURL.origin}${parsedImageURL.pathname}?fit=crop&auto=format&q=60&w=${
-			canvasSize[0]
-		}&h=${canvasSize[1]}&fm=jpg`,
-		autoFit: !!parsedQueryString.noFit ?? true,
 	};
 
 	const [fontData, fontElapsed] = await withDebug(async () =>

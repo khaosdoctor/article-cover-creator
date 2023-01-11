@@ -1,8 +1,13 @@
 import { z } from 'x/zod@v3.20.2/mod.ts';
 
-export const getBlogArticleQueryStringSchema = z.object({
+export const getBlogArticleQueryStringSchema = (canvasSize: number[]) => z.object({
 	title: z.string().min(1).max(100),
-	image: z.string().url(),
+	image: z.string().url().transform((image: string) => {
+		const parsedImageURL = new URL(image);
+		return `${parsedImageURL.origin}${parsedImageURL.pathname}?fit=crop&auto=format&q=60&w=${
+			canvasSize[0]
+		}&h=${canvasSize[1]}&fm=jpg`
+	}),
 	fontSize: z.string().default('100'),
 	marginLeft: z.string().default('75px'),
 	marginTop: z.string().default('85px'),
@@ -10,4 +15,4 @@ export const getBlogArticleQueryStringSchema = z.object({
 	debug: z.string().optional(),
 });
 
-export type GetBlogArticleQueryStringSchemaType = z.infer<typeof getBlogArticleQueryStringSchema>;
+export type GetBlogArticleQueryStringSchemaType = z.infer<ReturnType<typeof getBlogArticleQueryStringSchema>>;
