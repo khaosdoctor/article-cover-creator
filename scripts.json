@@ -2,7 +2,7 @@
   "$schema": "https://deno.land/x/denon@2.5.0/schema.json",
   "scripts": {},
   "watcher": {
-    "exts": ["ts", "json", "ejs"],
+    "exts": ["ts", "json", "tsx"],
     "match": ["src/**/*.*"]
   }
 }

@@ -1,6 +1,7 @@
 {
   "imports": {
     "x/": "https://deno.land/x/",
-    "std/": "https://deno.land/std@0.171.0/"
+    "std/": "https://deno.land/std@0.171.0/",
+    "react": "https://esm.sh/react@18.2.0"
   }
 }
