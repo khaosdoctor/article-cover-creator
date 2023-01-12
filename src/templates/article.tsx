@@ -11,6 +11,11 @@ export interface TemplateParams {
 	widthLimit: string;
 }
 
+function bufferToBase64 (bufferLike: ArrayBuffer): string {
+	const bufferAsString = new Uint8Array(bufferLike).reduce((data, byte) => `${data}${String.fromCharCode(byte)}`, '')
+	return btoa(bufferAsString)
+}
+
 export async function articleTemplate(params: TemplateParams) {
 	const globalStyles = {
 		mainBgColor: 'rgb(15, 5, 30)',
@@ -81,10 +86,11 @@ export async function articleTemplate(params: TemplateParams) {
 	};
 
 	const __dirname = dirname(fromFileUrl(import.meta.url));
-	const [stripes, avatar, logo] = await Promise.all([
+	const [stripes, avatar, logo, gradient] = await Promise.all([
 		Deno.readFile(resolve(__dirname, './img/stripes.png')),
 		Deno.readFile(resolve(__dirname, './img/avatar.png')),
 		Deno.readFile(resolve(__dirname, './img/logo.png')),
+		Deno.readFile(resolve(__dirname, './img/gradient.png')),
 	]);
 
 	return (
@@ -95,17 +101,18 @@ export async function articleTemplate(params: TemplateParams) {
 				<div style={overlayWrapperStyle}>
 					<span style={overlayTextStyle}>{params.title}</span>
 				</div>
+				<img style={{...globalImgStyle, ...imgStyles.stripes}} src={`data:image/png;base64,${bufferToBase64(gradient)}`} />
 				<img
 					style={{ ...globalImgStyle, ...imgStyles.stripes }}
-					src={`data:image/png;base64,${btoa(String.fromCharCode(...stripes))}`}
+					src={`data:image/png;base64,${bufferToBase64(stripes)}`}
 				/>
 				<img
 					style={{ ...globalImgStyle, ...imgStyles.avatar }}
-					src={`data:image/png;base64,${btoa(String.fromCharCode(...avatar))}`}
+					src={`data:image/png;base64,${bufferToBase64(avatar)}`}
 				/>
 				<img
 					style={{ ...globalImgStyle, ...imgStyles.logo }}
-					src={`data:image/png;base64,${btoa(String.fromCharCode(...logo))}`}
+					src={`data:image/png;base64,${bufferToBase64(logo)}`}
 				/>
 			</main>
 		</div>
