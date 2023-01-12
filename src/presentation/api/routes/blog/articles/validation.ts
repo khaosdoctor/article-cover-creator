@@ -11,7 +11,7 @@ export const getBlogArticleQueryStringSchema = (canvasSize: number[]) => z.objec
 	fontSize: z.string().default('100'),
 	marginLeft: z.string().default('75px'),
 	marginTop: z.string().default('85px'),
-	widthLimit: z.string().default('65%'),
+	widthLimit: z.string().default('80%'),
 	debug: z.string().optional(),
 });
 
