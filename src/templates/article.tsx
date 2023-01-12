@@ -98,10 +98,10 @@ export async function articleTemplate(params: TemplateParams) {
 			style={bodyStyle}
 		>
 			<main style={mainStyle}>
+				<img style={{...globalImgStyle, ...imgStyles.stripes}} src={`data:image/png;base64,${bufferToBase64(gradient)}`} />
 				<div style={overlayWrapperStyle}>
 					<span style={overlayTextStyle}>{params.title}</span>
 				</div>
-				<img style={{...globalImgStyle, ...imgStyles.stripes}} src={`data:image/png;base64,${bufferToBase64(gradient)}`} />
 				<img
 					style={{ ...globalImgStyle, ...imgStyles.stripes }}
 					src={`data:image/png;base64,${bufferToBase64(stripes)}`}
