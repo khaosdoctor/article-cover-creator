@@ -8,9 +8,9 @@ export const getBlogArticleQueryStringSchema = (canvasSize: number[]) => z.objec
 			canvasSize[0]
 		}&h=${canvasSize[1]}&fm=jpg`
 	}),
-	fontSize: z.string().default('100'),
+	fontSize: z.string().default('140'),
 	marginLeft: z.string().default('75px'),
-	marginTop: z.string().default('85px'),
+	marginTop: z.string().default('25px'),
 	widthLimit: z.string().default('80%'),
 	debug: z.string().optional(),
 });
