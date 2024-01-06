@@ -82,6 +82,7 @@ export async function articleTemplate(params: TemplateParams) {
 	const overlayTextStyle: React.CSSProperties = {
 		fontSize: params.fontSize,
 		fontFamily: 'Aller',
+		textShadow: '2px 2px 5px black',
 		textTransform: 'uppercase',
 	};
 
