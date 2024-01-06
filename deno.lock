@@ -1,5 +1,19 @@
 {
-  "version": "2",
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:chalk": "npm:chalk@5.2.0"
+    },
+    "npm": {
+      "chalk@5.2.0": {
+        "integrity": "sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==",
+        "dependencies": {}
+      }
+    }
+  },
+  "redirects": {
+    "https://esm.sh/v102/@types/react@^18/index.d.ts": "https://esm.sh/v102/@types/react@18.0.26/index.d.ts"
+  },
   "remote": {
     "https://deno.land/std@0.122.0/_util/assert.ts": "2f868145a042a11d5ad0a3c748dcf580add8a0dbc0e876eaa0026303a5488f58",
     "https://deno.land/std@0.122.0/_util/os.ts": "dfb186cc4e968c770ab6cc3288bd65f4871be03b93beecae57d657232ecffcac",
@@ -299,6 +313,7 @@
     "https://deno.land/std@0.170.0/path/win32.ts": "7cebd2bda6657371adc00061a1d23fdd87bcdf64b4843bb148b0b24c11b40f69",
     "https://deno.land/std@0.170.0/streams/write_all.ts": "7525aa90e34a2bb56d094403ad9c0e31e7db87a47cb556e6dc0404e6deca084c",
     "https://deno.land/std@0.171.0/_util/asserts.ts": "178dfc49a464aee693a7e285567b3d0b555dc805ff490505a8aae34f9cfb1462",
+    "https://deno.land/std@0.171.0/_util/os.ts": "d932f56d41e4f6a6093d56044e29ce637f8dcc43c5a90af43504a889cf1775e3",
     "https://deno.land/std@0.171.0/bytes/bytes_list.ts": "b4cbdfd2c263a13e8a904b12d082f6177ea97d9297274a4be134e989450dfa6a",
     "https://deno.land/std@0.171.0/bytes/concat.ts": "d26d6f3d7922e6d663dacfcd357563b7bf4a380ce5b9c2bbe0c8586662f25ce2",
     "https://deno.land/std@0.171.0/bytes/copy.ts": "939d89e302a9761dcf1d9c937c7711174ed74c59eef40a1e4569a05c9de88219",
@@ -322,6 +337,15 @@
     "https://deno.land/std@0.171.0/io/read_delim.ts": "7e102c66f00a118fa1e1ccd4abb080496f43766686907fd8b9522fdf85443586",
     "https://deno.land/std@0.171.0/io/read_lines.ts": "baee9e35034f2fdfccf63bc24b7e3cb45aa1c1c5de26d178f7bcbc572e87772f",
     "https://deno.land/std@0.171.0/io/read_string_delim.ts": "46eb0c9db3547caf8c759631effa200bbe48924f9b34f41edc627bde36cee52d",
+    "https://deno.land/std@0.171.0/path/_constants.ts": "e49961f6f4f48039c0dfed3c3f93e963ca3d92791c9d478ac5b43183413136e0",
+    "https://deno.land/std@0.171.0/path/_interface.ts": "6471159dfbbc357e03882c2266d21ef9afdb1e4aa771b0545e90db58a0ba314b",
+    "https://deno.land/std@0.171.0/path/_util.ts": "86c2375a996c1931b2f2ac71fefd5ddf0cf0e579fa4ab12d3e4c552d4223b8d8",
+    "https://deno.land/std@0.171.0/path/common.ts": "ee7505ab01fd22de3963b64e46cff31f40de34f9f8de1fff6a1bd2fe79380000",
+    "https://deno.land/std@0.171.0/path/glob.ts": "d479e0a695621c94d3fd7fe7abd4f9499caf32a8de13f25073451c6ef420a4e1",
+    "https://deno.land/std@0.171.0/path/mod.ts": "4b83694ac500d7d31b0cdafc927080a53dc0c3027eb2895790fb155082b0d232",
+    "https://deno.land/std@0.171.0/path/posix.ts": "2ecc259e6f34013889b7638ff90339a82d8178f629155761ce6001e41af55a43",
+    "https://deno.land/std@0.171.0/path/separator.ts": "0fb679739d0d1d7bf45b68dacfb4ec7563597a902edbaf3c59b50d5bcadd93b1",
+    "https://deno.land/std@0.171.0/path/win32.ts": "99170a0eb0e2b1ce41499c1e86bb55320cb6606299ad947f57ee0a291cdb93d5",
     "https://deno.land/std@0.171.0/testing/_diff.ts": "1a3c044aedf77647d6cac86b798c6417603361b66b54c53331b312caeb447aea",
     "https://deno.land/std@0.171.0/testing/_format.ts": "a69126e8a469009adf4cf2a50af889aca364c349797e63174884a52ff75cf4c7",
     "https://deno.land/std@0.171.0/testing/asserts.ts": "984ab0bfb3faeed92ffaa3a6b06536c66811185328c5dd146257c702c41b01ab",
@@ -651,14 +675,5 @@
     "https://esm.sh/v102/yoga-wasm-web@0.3.0/deno/yoga-wasm-web.js": "9579e59834545c322bfa9fffbff5f91effd36898691d2694d82d8245b6b49a89",
     "https://esm.sh/v102/yoga-wasm-web@0.3.0/index.d.ts": "264ba805e17438901803b81a1abf605ea78558e83460121933d37eaaaf55954b",
     "https://esm.sh/yoga-wasm-web@0.3.0": "1cf49e66ebe4157310d555d3d36a795918526dd33453217a7f9a34a8e789f1ce"
-  },
-  "npm": {
-    "specifiers": { "chalk": "chalk@5.2.0" },
-    "packages": {
-      "chalk@5.2.0": {
-        "integrity": "sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==",
-        "dependencies": {}
-      }
-    }
   }
 }

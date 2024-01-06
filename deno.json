@@ -11,7 +11,7 @@
   "lock": true,
   "tasks": {
     "api": "deno run --allow-read --allow-net --allow-write --allow-run --unstable --allow-env src/presentation/api/api.ts",
-    "dev:api": "DENO_ENV=local denon run -A src/presentation/api/api.ts",
+    "dev:api": "DENO_ENV=local deno run --watch -A src/presentation/api/api.ts",
     "cli": "deno run --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
     "compile:cli:arm": "deno compile --target aarch64-apple-darwin -o ./bin/cover-gen-mac-arm --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
     "compile:cli:darwin": "deno compile --target x86_64-apple-darwin -o ./bin/cover-gen-mac-intel --allow-read --allow-write --allow-run --unstable --allow-net --allow-env src/presentation/cli/cli.ts",
