@@ -1,6 +1,7 @@
 /** @jsx React.createElement */
 import { dirname, fromFileUrl, resolve } from '@std/path';
 import * as React from 'react';
+import { encodeBase64 } from '@std/encoding';
 
 export interface TemplateParams {
 	title: string;
@@ -11,12 +12,15 @@ export interface TemplateParams {
 	widthLimit: string;
 }
 
-function bufferToBase64 (bufferLike: ArrayBuffer): string {
-	const bufferAsString = new Uint8Array(bufferLike).reduce((data, byte) => `${data}${String.fromCharCode(byte)}`, '')
-	return btoa(bufferAsString)
+function bufferToBase64(bufferLike: ArrayBuffer): string {
+	const bufferAsString = new Uint8Array(bufferLike).reduce(
+		(data, byte) => `${data}${String.fromCharCode(byte)}`,
+		'',
+	);
+	return btoa(bufferAsString);
 }
 
-export async function articleTemplate(params: TemplateParams) {
+export async function articleTemplate(params: TemplateParams, isRaw: boolean = false) {
 	const globalStyles = {
 		mainBgColor: 'rgb(15, 5, 30)',
 		globalWidth: '1440px',
@@ -94,14 +98,42 @@ export async function articleTemplate(params: TemplateParams) {
 		Deno.readFile(resolve(__dirname, './img/gradient.png')),
 	]);
 
+	// Only used for raw templating
+	const fontBase64 = encodeBase64(
+		await Deno.readFile(resolve(__dirname, './fonts/AllerDisplay.ttf')),
+	);
+
 	return (
 		<div
 			style={bodyStyle}
 		>
+			{/* This exists because we can't load the font face when it's a raw template
+				* then we have to load it manually through base64, but this only works if we set
+				* a script tag with dangerous html, otherwise I can't manually access `document` to add the FontFace
+				* and the template to image function does not accept this type of html
+			*/}
+			{isRaw && (
+				<script
+					type='text/javascript'
+					dangerouslySetInnerHTML={{
+						__html: `
+					const fontFace = new FontFace('Aller', 'url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format("truetype")')
+					document.fonts.add(fontFace)
+					fontFace.load().then(() => {
+						document.findElementById('text').style.fontFamily = 'Aller'
+					})
+				`,
+					}}
+				>
+				</script>
+			)}
 			<main style={mainStyle}>
-				<img style={{...globalImgStyle, ...imgStyles.stripes}} src={`data:image/png;base64,${bufferToBase64(gradient)}`} />
+				<img
+					style={{ ...globalImgStyle, ...imgStyles.stripes }}
+					src={`data:image/png;base64,${bufferToBase64(gradient)}`}
+				/>
 				<div style={overlayWrapperStyle}>
-					<span style={overlayTextStyle}>{params.title}</span>
+					<span id='text' style={overlayTextStyle}>{params.title}</span>
 				</div>
 				<img
 					style={{ ...globalImgStyle, ...imgStyles.stripes }}

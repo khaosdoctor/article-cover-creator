@@ -12,7 +12,8 @@ export const getBlogArticleQueryStringSchema = (canvasSize: number[]) => z.objec
 	marginLeft: z.string().default('75px'),
 	marginTop: z.string().default('25px'),
 	widthLimit: z.string().default('80%'),
-	debug: z.string().optional(),
+	debug: z.coerce.boolean().optional(),
+	raw: z.coerce.boolean().optional()
 });
 
 export type GetBlogArticleQueryStringSchemaType = z.infer<ReturnType<typeof getBlogArticleQueryStringSchema>>;

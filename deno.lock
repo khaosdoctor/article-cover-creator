@@ -19,6 +19,7 @@
       "jsr:@std/crypto@0.223": "jsr:@std/crypto@0.223.0",
       "jsr:@std/crypto@0.224": "jsr:@std/crypto@0.224.0",
       "jsr:@std/dotenv@^0.224.1": "jsr:@std/dotenv@0.224.1",
+      "jsr:@std/encoding": "jsr:@std/encoding@0.224.3",
       "jsr:@std/encoding@1.0.0-rc.2": "jsr:@std/encoding@1.0.0-rc.2",
       "jsr:@std/encoding@^0.223.0": "jsr:@std/encoding@0.223.0",
       "jsr:@std/encoding@^0.224.3": "jsr:@std/encoding@0.224.3",
@@ -216,9 +217,14 @@
     }
   },
   "redirects": {
-    "https://esm.sh/v102/@types/react@^18/index.d.ts": "https://esm.sh/v102/@types/react@18.0.26/index.d.ts"
+    "https://esm.sh/v102/@types/react@^18/index.d.ts": "https://esm.sh/v102/@types/react@18.0.26/index.d.ts",
+    "https://esm.sh/v135/@types/react-dom@~18.2/index.d.ts": "https://esm.sh/v135/@types/react-dom@18.2.25/index.d.ts",
+    "https://esm.sh/v135/@types/react-dom@~18.2/server~.d.ts": "https://esm.sh/v135/@types/react-dom@18.2.25/server~.d.ts"
   },
   "remote": {
+    "https://cdn.skypack.dev/-/preact-render-to-string@v5.1.12-bxVngfUvIHzdneYL1ENU/dist=es2019,mode=imports/optimized/preact-render-to-string.js": "4c39d922d84b828cd531e9ff8f48db9ee5aca58afac6b30d705a594037aee241",
+    "https://cdn.skypack.dev/-/preact@v10.9.0-sxzybx7sBosD3fXpfbt3/dist=es2019,mode=imports/optimized/preact.js": "e66dc0378907870a2230ec2e087214c1ec7678150220412f8438f918744b2ecc",
+    "https://cdn.skypack.dev/preact-render-to-string@v5.1.12": "efe649e5d99870f8cf2802857b16cf62a14ce799e3bc1ba9ea3e102efb218f58",
     "https://deno.land/std@0.122.0/_util/assert.ts": "2f868145a042a11d5ad0a3c748dcf580add8a0dbc0e876eaa0026303a5488f58",
     "https://deno.land/std@0.122.0/_util/os.ts": "dfb186cc4e968c770ab6cc3288bd65f4871be03b93beecae57d657232ecffcac",
     "https://deno.land/std@0.122.0/fmt/colors.ts": "8368ddf2d48dfe413ffd04cdbb7ae6a1009cf0dccc9c7ff1d76259d9c61a0621",
@@ -957,10 +963,13 @@
     "https://esm.sh/@resvg/resvg-wasm@2.0.0-alpha.4": "4bac87849e1af12e0eef72c1b55350fed65845130d288a7f8b1b2e2a0b3d1034",
     "https://esm.sh/ejs@3.1.8": "96e74611dad3d1702896d78e45c03ecbd7c1999ca760d83352bcdcc0d1125b8e",
     "https://esm.sh/jszip@3.5.0": "2010b24f0f703bbf879e06ee45eba91ef1ae591c62f89cc3d15bdf2ed42f516d",
+    "https://esm.sh/react-dom@18.2.0": "f6b0d147f7c364819144f06e24839ed89354ce25d8b6608de57871130b19a0b2",
+    "https://esm.sh/react-dom@18.2.0/server": "4e27b938451e1f25855754fe5149dd13f554ca75f3c5b387eb453144539c3dc7",
     "https://esm.sh/react@18.2.0": "84aa07282d2f3c843f7d56daeae0be41ceae768391c4418f7358dd64e8fe4eca",
     "https://esm.sh/satori@0.0.46": "e78a65381ff501a7e7fa92b3279385d68c4a10ebf3016f2317f5e166ad7ea3f3",
     "https://esm.sh/satori@0.0.46/wasm": "1b228dc03d454bd0dda20598f11f3570085b903da1a0c39104d6f530dd574464",
     "https://esm.sh/stable/react@18.2.0/deno/react.js": "0113c672572d23a90490f1b03731866a18bbbfe2ab4ff8e52c2e91b60c4188f0",
+    "https://esm.sh/stable/react@18.2.0/denonext/react.mjs": "3c4f23bcfc53b256fcfaf6f834fa9f584c3bb7be667b2682c6cb6ba8ef88f8e6",
     "https://esm.sh/v102/@resvg/resvg-wasm@2.0.0-alpha.4/deno/resvg-wasm.js": "d691503055a17b2092c3ce741c377798539c180d4745c7fbb8fbfee351eafaee",
     "https://esm.sh/v102/@resvg/resvg-wasm@2.0.0-alpha.4/index.d.ts": "41778cf1715edd3c641eb20932e69e7385af011d9c669560f8d50f5237ce42ed",
     "https://esm.sh/v102/@shuding/opentype.js@1.4.0-beta.0/deno/opentype.js": "aa2e7cc017b312c1aeada62e9608edd1911a3afaa8bf657df63b4dae23133497",
@@ -1001,6 +1010,9 @@
     "https://esm.sh/v102/yoga-wasm-web@0.3.0/deno/asm.js": "df3b69fa3c97351233e841a3d725aaff0bfa832a632a888cb7f4d52d56ebcb7b",
     "https://esm.sh/v102/yoga-wasm-web@0.3.0/deno/yoga-wasm-web.js": "9579e59834545c322bfa9fffbff5f91effd36898691d2694d82d8245b6b49a89",
     "https://esm.sh/v102/yoga-wasm-web@0.3.0/index.d.ts": "264ba805e17438901803b81a1abf605ea78558e83460121933d37eaaaf55954b",
+    "https://esm.sh/v135/react-dom@18.2.0/denonext/react-dom.mjs": "8191fc377ea7083cca5640699c4abd75de033089eb932799e29aa04bb136838f",
+    "https://esm.sh/v135/react-dom@18.2.0/denonext/server.js": "ead88af18fb70a507ccab7bc02732e9d225ef224a6de05f4829605008e796750",
+    "https://esm.sh/v135/scheduler@0.23.0/denonext/scheduler.mjs": "cdbc6d2823e2c6fffcb14501146ff2602a38c48d3c9dd9268f308e833ede2b49",
     "https://esm.sh/yoga-wasm-web@0.3.0": "1cf49e66ebe4157310d555d3d36a795918526dd33453217a7f9a34a8e789f1ce"
   },
   "workspace": {

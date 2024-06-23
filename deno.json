@@ -30,6 +30,7 @@
 		"zod": "https://deno.land/x/zod@v3.23.8/mod.ts",
 		"og_edge": "https://deno.land/x/og_edge@0.0.5/mod.ts",
 		"react": "https://esm.sh/react@18.2.0",
+		"reactDOM": "https://esm.sh/react-dom@18.2.0/server",
 		"compress": "https://deno.land/x/compress@v0.4.6/mod.ts"
 	}
 }
