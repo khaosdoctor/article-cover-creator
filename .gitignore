@@ -1,4 +1,5 @@
 .env
+.local_kv*
 bin/
 ### Node
 # Logs
