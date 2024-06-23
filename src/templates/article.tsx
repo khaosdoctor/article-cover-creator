@@ -1,5 +1,5 @@
 /** @jsx React.createElement */
-import { dirname, fromFileUrl, resolve } from 'std/path/mod.ts';
+import { dirname, fromFileUrl, resolve } from '@std/path';
 import * as React from 'react';
 
 export interface TemplateParams {

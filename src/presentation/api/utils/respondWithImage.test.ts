@@ -1,6 +1,6 @@
-import { assertEquals } from 'std/testing/asserts.ts';
+import { assertEquals } from '@std/assert';
 import { sendImageResponse } from './respondWithImage.ts';
-import { Buffer } from 'std/io/buffer.ts';
+import { Buffer } from '@std/io/buffer';
 
 Deno.test('sendImageResponse sets the correct headers and body with no debug tags', () => {
 	const ctx: any = {

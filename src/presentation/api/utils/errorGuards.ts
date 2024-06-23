@@ -1,4 +1,4 @@
-import { ZodError } from 'x/zod@v3.20.2/mod.ts';
+import { ZodError } from 'zod';
 
 export const isZodError = (error: unknown): error is ZodError => {
 	return error instanceof ZodError;

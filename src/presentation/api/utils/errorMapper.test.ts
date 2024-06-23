@@ -1,7 +1,8 @@
-import { assertEquals } from 'std/testing/asserts.ts';
+import { assertEquals } from '@std/assert';
 import { errorMapper } from './errorMapper.ts';
-import { ZodError } from 'x/zod@v3.20.2/mod.ts';
-import { HttpError } from 'std/http/http_errors.ts';
+import { ZodError } from 'zod';
+import { HttpError } from '@oak/oak';
+
 
 Deno.test('errorMapper maps ZodError to expected error response', () => {
 	const zodError = new ZodError([

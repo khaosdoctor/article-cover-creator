@@ -1,5 +1,5 @@
-import { HttpError } from 'x/oak@v11.1.0/mod.ts';
-import { ZodError, ZodInvalidTypeIssue } from 'x/zod@v3.20.2/mod.ts';
+import { HttpError } from '@oak/oak';
+import { ZodError, ZodInvalidTypeIssue } from 'zod';
 
 type ErrorMapperFn = (incomingError: any, isLocal: boolean) => {
 	status: number;

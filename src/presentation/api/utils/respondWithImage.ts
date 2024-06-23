@@ -1,4 +1,5 @@
-import { RouterContext } from 'x/oak@v11.1.0/mod.ts';
+import { RouterContext } from '@oak/oak';
+import { ImageCache } from '../../../actions/cacheFactory.ts';
 
 export const sendImageResponse = (
 	ctx: RouterContext<
@@ -6,7 +7,8 @@ export const sendImageResponse = (
 		Record<string | number, string | undefined>,
 		Record<string, any>
 	>,
-	image: ArrayBuffer,
+	image: Uint8Array | ArrayBuffer,
+	cache: ImageCache,
 	debugData?: Record<string, any>,
 ) => {
 	ctx.response.headers.set('Content-Type', 'image/png');
@@ -18,5 +20,7 @@ export const sendImageResponse = (
 		}
 	}
 	ctx.response.body = image;
-	return ctx;
+
+	cache.put(ctx.request.url, image)
+	return ctx
 };

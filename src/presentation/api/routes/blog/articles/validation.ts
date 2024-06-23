@@ -1,4 +1,4 @@
-import { z } from 'x/zod@v3.20.2/mod.ts';
+import { z } from 'zod';
 
 export const getBlogArticleQueryStringSchema = (canvasSize: number[]) => z.object({
 	title: z.string().min(1).max(100),
