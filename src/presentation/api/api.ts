@@ -1,6 +1,5 @@
 import { Application, createHttpError, Router } from '@oak/oak';
 import { fromFileUrl, resolve } from '@std/path';
-import { cacheFactory } from '../../actions/cacheFactory.ts';
 import { createImageFromHTML } from '../../actions/createImageFromHtml.tsx';
 import { appConfig as config } from '../../config.ts';
 import { CanvasSizes, getBlogArticleQueryStringSchema } from './routes/blog/articles/validation.ts';
@@ -11,18 +10,12 @@ import DOMServer from 'reactDOM';
 import { generateTemplate } from '../../templates/generateTemplate.ts';
 
 const router = new Router();
-const cache = await cacheFactory();
 // Import fonts
 const fontData = await Deno.readFile(
   resolve(fromFileUrl(import.meta.url), '../../../templates/fonts/AllerDisplay.ttf'),
 );
 
 router.get('/blog/articles', async (ctx) => {
-  const cached = await cache.match(ctx.request.url);
-  if (cached) {
-    return sendImageResponse(ctx, cached, cache, { fromCache: true });
-  }
-
   const queryString = Object.fromEntries(ctx.request.url.searchParams.entries());
   const { debug, raw, template, ...parsedQueryString } = await getBlogArticleQueryStringSchema()
     .parseAsync(
@@ -59,7 +52,7 @@ router.get('/blog/articles', async (ctx) => {
   );
   const debugHeaders = debug ? { templateElapsed, imageElapsed } : undefined;
 
-  sendImageResponse(ctx, image, cache, debugHeaders);
+  sendImageResponse(ctx, image, debugHeaders);
 });
 
 const app = new Application();
