@@ -60,7 +60,8 @@ const articleTemplate: TemplateFactory<SquareTemplateParams> = async (
 
   const overlayWrapperStyle: React.CSSProperties = {
     display: 'flex',
-    marginTop: '6em',
+    // NOTE: 100% will push the avatar off the screen on the SVG
+    height: '80%',
     alignContent: 'center',
     overflowWrap: 'break-word',
     textAlign: 'center',
